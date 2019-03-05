@@ -3,9 +3,9 @@
 #include <sys/time.h>
 #include <inttypes.h>
 
-#define n 1000001
+#define n 1000000
 
-#define INT uint32_t
+#define INT uint16_t
 
 
 double wtime()
@@ -92,7 +92,7 @@ void InsertionSort(INT mas[n])
 	double time;
 
 
-	time = wtime(); /*Присваем переменной "time" текущее время в секундах*/
+	time = wtime();
 
 
 	for (i = 0; i < n; i++) {
@@ -107,9 +107,61 @@ void InsertionSort(INT mas[n])
 	}
 
 	time = wtime() - time;
-	printf("Work time: %f sec.\n", time);  /*Записываем время работы функции*/
+	printf("Work time: %f sec.\n", time);  
 
 }
+
+
+
+void HeapSort(INT mas[n])
+{
+	double time;
+
+
+	time = wtime();
+
+
+void PyramidFormation(INT* mas, int i, int lower)
+{
+	int MaxChild;
+	int flag = 0;   /*flag - флаг, обозначающий факт, что куча отсортирована*/
+
+while ((i * 2 <= lower) && (flag != 1)) {
+	if (i * 2 == lower) 
+		MaxChild = i * 2;
+	else if (mas[i * 2 ] > mas[i * 2 + 1])
+		MaxChild = i * 2;
+	else
+		MaxChild = i * 2 + 1;
+	if (mas[i] < mas[MaxChild]) {
+		swap(&mas[i], &mas[MaxChild]);
+		i = MaxChild;
+		}
+	else
+		flag = 1;
+	}
+}
+
+
+	for (int i = (n / 2) - 1; i >= 0; i--) {     	
+		PyramidFormation(mas, i, n - 1);	/*Формируем нижний ряд*/
+	}
+
+	for (int i = n - 1; i >= 1; i--) {
+		swap(&mas[0], &mas[i]);
+		PyramidFormation(mas, 0, i - 1);  /*Формируем остальные элементы пирамиды*/
+	}
+
+
+	for (int i = 0; i < n; i++) {
+		printf("mas[%d] = %d\n", i, mas[i]);
+	}
+
+	time = wtime() - time;
+	printf("Work time: %f sec.\n", time);  
+}
+
+
 
 
 int main()
@@ -125,7 +177,7 @@ int main()
 
 
 	for (i = 0; i < n; i++) {
-		mas[i] = getrand(0, 1000);
+		mas[i] = getrand(0, 10000);
 	}
 
 	printf("Press '1' for Counting Sort\n");
@@ -142,4 +194,6 @@ int main()
 	if (choice == 2)
 		InsertionSort(mas);
 
+	if (choice == 3)
+		HeapSort(mas);
 }
