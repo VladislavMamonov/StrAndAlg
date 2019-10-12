@@ -1,0 +1,28 @@
+#!/usr/bin/gnuplot
+set terminal png size 1920,1080 enhanced font 'Arial, 16'
+set output 'EXP1.png'
+
+set style line 1 linecolor rgb 'red' linetype 1 linewidth 2
+set style line 2 linecolor rgb 'blue' linetype 1 linewidth 2
+
+
+set border linewidth 2
+set key top left
+set grid
+set logscale y
+set mytics 1
+set format y "%.9f"
+set xlabel "Number of elements"
+set format x "%3.0f" 
+set ylabel "Lookup time (sec)"
+set xtics 100000
+set xtics 10000
+set xtics 20000
+set xtics 30000
+set xtics 40000
+set ytics 0.1
+set rmargin 4
+set tmargin 2
+set mxtics
+plot "bstree_lookup.dat" using 1:2 title "Bstree" with linespoints ls 1,\
+"hashtab_lookup.dat" using 1:2 title "Hashtab" with linespoints ls 2
