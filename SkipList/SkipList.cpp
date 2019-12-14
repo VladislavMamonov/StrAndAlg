@@ -16,11 +16,7 @@ int skiplist::random_level()
     first = false;
   }
 
-  float kek = frand();
-  cout << "RAND: " << kek << endl;
-
   int lvl = (int)(log(frand()) / log(1.-P));
-
   cout << "LVL: " << lvl << endl;
 
   return lvl < MAX_LEVEL ? lvl : MAX_LEVEL;
